@@ -119,7 +119,6 @@ body {
 
 :root {
     --swiper-navigation-size: 18px;
-    padding: 10px;
 }
 
 .hero__cta {
@@ -138,7 +137,8 @@ body {
 }
 
 .hero__btn,
-.card__basket {
+.card__basket,
+.form__btn {
     color: #fff;
     text-transform: uppercase;
     background-color: #ff2e55;
@@ -154,7 +154,8 @@ body {
 }
 
 .hero__btn:hover,
-.card__basket:hover {
+.card__basket:hover,
+.form__btn:hover {
     color: #ff2e55;
     background-color: transparent;
     border: 1px solid #ff2e55;
@@ -355,18 +356,42 @@ body {
     justify-content: space-evenly;
 }
 
+.card__input-colors {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    z-index: -9;
+}
+
 .card__label {
     width: 20px;
     height: 20px;
     cursor: pointer;
+    position: relative;
 }
 
-.card__label:checked {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    border: 11px solid green;
+.card__label-cheched {
+    opacity: 0;
+    content: "";
+    width: 14px;
+    height: 14px;
+    display: block;
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    background: -o-linear-gradient(188.35deg, #292929 -3.95%, #09090a 109.44%);
+    background: linear-gradient(261.65deg, #292929 -3.95%, #09090a 109.44%);
+    -webkit-transition: .4s ease-in;
+    -o-transition: .4s ease-in;
+    transition: .4s ease-in;
 }
+
+.card__input-colors:checked + .card__label-cheched {
+    opacity: 1;
+} 
 
 .card__label-white {
     background-color: #fff;
@@ -386,13 +411,6 @@ body {
 
 .card__label-blue {
     background-color: #12129D;
-}
-
-.card__input-colors {
-    opacity: 0;
-    visibility: hidden;
-    position: absolute;
-    z-index: -9;
 }
 
 .card__counter-group {
@@ -470,6 +488,21 @@ body {
     margin-bottom: 65px;
     font-size: 30px;
     color: #fff;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 2px;
+    text-decoration: none;
+    border-bottom: 3px solid #fff;
+    display: inline-block;
+    transition-duration: .5s;
+}
+
+.offer__link:hover,
+.offer__phone:hover,
+.footer__list-link:hover,
+.footer__phone:hover {
+    color: #ff2e55;
+    border-bottom: 3px solid #ff2e55;
 }
 
 .offer__label {
@@ -482,6 +515,8 @@ body {
     font-size: 36px;
     text-decoration: none;
     color: #fff;
+    transition-duration: .5s;
+    border-bottom: 3px solid transparent;
 }
 
 .footer__list {
@@ -501,10 +536,22 @@ body {
     color: #fff;
     text-transform: uppercase;
     font-size: 18px;
+    text-decoration: none;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 3px;
+    transition-duration: .5s;
 }
 
 .socials {
     font-size: 16px;
+}
+
+.socials__img {
+    transition-duration: .5s;
+}
+
+.socials:hover .socials__img {
+    transform: scale(2) translateX(10px);
 }
 
 .footer__info {
@@ -523,4 +570,100 @@ body {
     display: block;
     margin-bottom: 12px;
     margin-top: 12px;
+    transition-duration: .5s;
+    border-bottom: 3px solid transparent;
+    display: inline-block;
+}
+
+.footer .header {
+    padding-top: 44px;
+    padding-bottom: 44px;
+    background-color: #fff;
+    margin-bottom: 0;
+}
+
+.footer .header__description,
+.footer .header__info,
+.footer .header__info-link {
+    color: #000;
+}
+
+.modal-1,
+.modal-2 {
+    display: none;
+    color: #292929;
+}
+
+.modal-1 .form__btn {
+    padding: 15px;
+    display: block;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.form__input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+}
+
+@media(max-width: 768px) {
+    .header {
+        margin-bottom: 50px;
+    }
+    .header,
+    .header__phone-info {
+        text-align: center;
+    }
+    .header__descr-block {
+        display: flex;
+        justify-content: center;
+    }
+    .hero__title {
+        font-size: 24px;
+        line-height: 1.6;
+    }
+    .hero__description {
+        font-size: 16px;
+        line-height: 1.6;
+        margin-top: 20px;
+    }
+    .hero__btn {
+        padding: 20px 40px;
+    }
+    .reviews__slide {
+        flex-direction: column;
+    }
+    .card__colors {
+        max-width: 200px;
+        margin: auto;
+    }
+    .card__label-text {
+        margin: 20px auto;
+    }
+    .card {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 400px;
+    }
+    .footer__info {
+        text-align: left;
+    }
+}
+
+@media(max-width: 576px) {
+    .offer__title {
+        font-size: 20px;
+        line-height: 25px;
+    }
+    .offer__link {
+        font-size: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-bottom: 35px;
+        max-width: 260px;
+    }
+    .offer__phone {
+        font-size: 24px;
+    }
 }
