@@ -12,12 +12,10 @@
     <section class="hero">
         <div class="container">
             <h1 class="hero__title">
-                Эксклюзивные цветы и букеты flowers shop
+            <?php the_field('main_title')?>
             </h1>
             <p class="hero__description">
-                первая в россии эксклюзивная доставка цветов для людей,
-                которые ценят <span class="hero__description-color">
-                    уникальность
+            <?php the_field('main_subtitle')?>
                 </span>                  
             </p>
             <div class="swiper-container flowers-slider">
@@ -48,10 +46,7 @@
                 <div class="swiper-button-next flowers-slider__btn"></div>
             </div>
             <p class="hero__cta">
-                Закажите эксклюзивный букет со 
-                <span class="hero__cta-color">
-                    скидкой 10%
-                </span>
+            <?php the_field('main_discount')?>
             </p>
             <button data-fancybox data-src="#modal-1" href="javascript:;" class="hero__btn">
                 Заказать букет
@@ -65,75 +60,45 @@
             </h2>
             <div class="swiper-container reviews-slider">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide reviews__slide">
-                        <div class="reviews__image reviews__image-1">
-                            <span class="reviews__name">
-                                Алиса Иванова
-                            </span>
-                            <span class="reviews__city">
-                                г. Киев
-                            </span>
-                        </div>
-                        <div class="reviews__text-box">
-                            <p class="reviews__text">
-                                Я очень довольна таким отношением к делу. 
-                                Обслужили просто превосходно, я заказывала 
-                                по телефону — так подробно мне всё объяснили, 
-                                помогли выбрать замечательный букет, и привезли 
-                                всё вовремя, букет был очень красивый, он очень 
-                                понравился, спасибо вам огромное.
-                            </p>
-                            <a href="javascript:;" id="review-1" class="reviews__link">
-                                Посмотреть фотографии букета
-                            </a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide reviews__slide">
-                        <div class="reviews__image reviews__image-2">
-                            <span class="reviews__name">
-                                Ника Смирнова
-                            </span>
-                            <span class="reviews__city">
-                                г. Одесса
-                            </span>
-                        </div>
-                        <div class="reviews__text-box">
-                            <p class="reviews__text">
-                                Я очень довольна таким отношением к делу. 
-                                Обслужили просто превосходно, я заказывала 
-                                по телефону — так подробно мне всё объяснили, 
-                                помогли выбрать замечательный букет, и привезли 
-                                всё вовремя, букет был очень красивый, он очень 
-                                понравился, спасибо вам огромное.
-                            </p>
-                            <a href="#" class="reviews__link">
-                                Посмотреть фотографии букета
-                            </a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide reviews__slide">
-                        <div class="reviews__image reviews__image-3">
-                            <span class="reviews__name">
-                                Маргарита Смаева
-                            </span>
-                            <span class="reviews__city">
-                                г. Краснодар
-                            </span>
-                        </div>
-                        <div class="reviews__text-box">
-                            <p class="reviews__text">
-                                Я очень довольна таким отношением к делу. 
-                                Обслужили просто превосходно, я заказывала 
-                                по телефону — так подробно мне всё объяснили, 
-                                помогли выбрать замечательный букет, и привезли 
-                                всё вовремя, букет был очень красивый, он очень 
-                                понравился, спасибо вам огромное.
-                            </p>
-                            <a href="#" class="reviews__link">
-                                Посмотреть фотографии букета
-                            </a>
-                        </div>
-                    </div>
+                <?php		
+                    global $post;
+
+                    $query = new WP_Query( [
+                        'posts_per_page' => 5,
+                        'post_type'        => 'reviews',
+                    ] );
+
+                    if ( $query->have_posts() ) {
+                        while ( $query->have_posts() ) {
+                            $query->the_post();
+                        ?>
+                            <div class="swiper-slide reviews__slide">
+                                <div class="reviews__image">
+                                    <?php the_post_thumbnail('small')?>
+                                    <span class="reviews__name">
+                                        <?php the_title();?>
+                                    </span>
+                                    <span class="reviews__city">
+                                    <?php the_field('city');?>
+                                    </span>
+                                </div>
+                                <div class="reviews__text-box">
+                                    <p class="reviews__text">
+                                        <?php the_content();?>
+                                    </p>
+                                    <a href="#" class="reviews__link">
+                                        Посмотреть фотографии букета
+                                    </a>
+                                </div>
+                            </div>
+                        <?php 
+                        }
+                    } else {
+                        // Постов не найдено
+                    }
+
+                    wp_reset_postdata(); // Сбрасываем $post
+                ?>
                 </div>
                 <div class="swiper-button-prev reviews-slider__btn"></div>
                 <div class="swiper-button-next reviews-slider__btn"></div>
@@ -145,10 +110,12 @@
             <div class="row">
                 <div class="col-md-4 mb-5 mb-md-0 advantages__box">
                     <div class="advantages__wrapp">
-                        <img src="<?php echo get_template_directory_uri()?>//assets/images/icons/icon-planet.svg" alt="icon: planet" class="advantages__icon">
+                        <!-- <img src="<?php echo get_template_directory_uri()?>//assets/images/icons/icon-planet.svg" alt="icon: planet" class="advantages__icon"> -->
+                        <img src="<?php the_field('advantages-img-1')?>" alt="icon: planet" class="advantages__icon">
+                        
                     </div>
                     <h3 class="advantages__title">
-                        Только прямые поставки цветов из Голландии
+                        <?php the_field('advantages-1')?>
                     </h3>
                 </div>
                 <div class="col-md-4 mb-5 mb-md-0 advantages__box">
@@ -905,8 +872,8 @@
             <span class="offer__label">
                 или позвоните по телефону
             </span>
-            <a href="tel:+78006548745" class="offer__phone">
-                8 (800) 654-87-45
+            <a href="tel:+<?php the_field('phone')?>" class="offer__phone">
+                <?php the_field('phone')?>
             </a>
         </div>
     </section>

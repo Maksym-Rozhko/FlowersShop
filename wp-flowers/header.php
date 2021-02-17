@@ -13,8 +13,8 @@
                 </p>
             </div>
             <div class="col-lg-3 col-md-5 header__phone-info">
-                <a href="tel:+78006548745" class="header__phone">
-                    8 (800) 654-87-45
+                <a href="tel:<?php the_field('phone')?>" class="header__phone">
+                <?php the_field('phone')?>
                 </a>
                 <span class="header__info">
                     Звонок по России бесплатно
